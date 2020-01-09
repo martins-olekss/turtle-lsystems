@@ -68,11 +68,9 @@ class Lsystems
                     $this->turtle->move($this->settings['move']);
                     break;
                 case '-':
-                    $this->turtle->set_color(250, 15, 19, 10);
                     $this->turtle->rotate(-$this->settings['rotate']);
                     break;
                 case '+':
-                    $this->turtle->set_color(2, 245, 90, 10);
                     $this->turtle->rotate($this->settings['rotate']);
                     break;
             }
@@ -85,13 +83,11 @@ class Lsystems
     public function draw($input)
     {
         $inputArray = str_split($input);
-        $this->turtle->set_color(255, 128, 64, 0);
-        $this->turtle->goto(20, 20);
+        $this->turtle->set_color(mt_rand(20,255), mt_rand(20,255), mt_rand(20,255), 0);
         $this->turtle->goto($this->settings['startPosition'][0], $this->settings['startPosition'][1]);
-        $this->turtle->set_color(200, 5, 9, 0);
         for ($i = 0; $i <= $this->settings['iterations']; $i++) {
-            $this->turtle->set_color(250, 15, 19, 0);
             $this->operateTurtle($inputArray);
+            $this->turtle->set_color(mt_rand(20,255), mt_rand(20,255), mt_rand(20,255), 10);
         }
     }
 }
