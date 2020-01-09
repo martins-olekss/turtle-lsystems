@@ -22,12 +22,18 @@ class Lsystems
 
     public function __construct()
     {
-        $this->image = new Image($this->settings['imageWidth'], $this->settings['imageHeight'], 0, 0, 0);
-        $this->turtle = new Turtle($this->image);
+
     }
 
     public function settings(array $settings) {
         $this->settings = $settings;
+
+        return $this;
+    }
+
+    public function init() {
+        $this->image = new Image($this->settings['imageWidth'], $this->settings['imageHeight'], 0, 0, 0);
+        $this->turtle = new Turtle($this->image);
     }
 
     public function execute()
@@ -62,11 +68,11 @@ class Lsystems
                     $this->turtle->move($this->settings['move']);
                     break;
                 case '-':
-                    $this->turtle->set_color(250, 150, 19, 10);
+                    $this->turtle->set_color(250, 15, 19, 10);
                     $this->turtle->rotate(-$this->settings['rotate']);
                     break;
                 case '+':
-                    $this->turtle->set_color(20, 240, 90, 100);
+                    $this->turtle->set_color(2, 245, 90, 10);
                     $this->turtle->rotate($this->settings['rotate']);
                     break;
             }
@@ -82,8 +88,9 @@ class Lsystems
         $this->turtle->set_color(255, 128, 64, 0);
         $this->turtle->goto(20, 20);
         $this->turtle->goto($this->settings['startPosition'][0], $this->settings['startPosition'][1]);
-        $this->turtle->set_color(200, 5, 9, 20);
+        $this->turtle->set_color(200, 5, 9, 0);
         for ($i = 0; $i <= $this->settings['iterations']; $i++) {
+            $this->turtle->set_color(250, 15, 19, 0);
             $this->operateTurtle($inputArray);
         }
     }

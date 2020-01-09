@@ -3,18 +3,23 @@ require_once 'src/Lsystems.php';
 
 $ls = new Lsystems();
 $settings = [
-    'imageWidth' => 2200,
-    'imageHeight' => 2200,
-    'startPosition' => [600, 600],
-    'iterations' => 130,
-    'startInput' => '+F-F+YX-F+F-X',
-    'rotate' => 33.5,
-    'move' => 40,
+    'imageWidth' => 5000,
+    'imageHeight' => 5000,
+    'startPosition' => [2000, 2500],
+    'iterations' => 200,
+    'startInput' => '+YF−XFF--BK+AH-UO-Y+',
+    'rotate' => 45.5,
+    'move' => 15,
     'rules' => [
-        ['X', '+YF−XFX−FY+'],
-        ['Y', '−XF+YFY+FX−']
+        ['X', '-YF+X-FF-F+XF+-'],
+        ['X', '-YF+X-FF+XF+-'],
+        ['XF', '+−FY+'],
+        ['XF', '+−FY-'],
+        ['XF', '+−FY+'],
+        ['F', '−XFX−F+BY-XF+'],
+        ['F', '−XFX−-XF+']
     ]
 ];
 
-$ls->settings($settings);
+$ls->settings($settings)->init();
 $ls->execute();
