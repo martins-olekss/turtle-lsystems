@@ -85,7 +85,7 @@ class Lsystems
         $inputArray = str_split($input);
         $this->turtle->set_color(mt_rand(20,255), mt_rand(20,255), mt_rand(20,255), 0);
         $this->turtle->goto($this->settings['startPosition'][0], $this->settings['startPosition'][1]);
-        for ($i = 0; $i <= $this->settings['iterations']; $i++) {
+        for ($i = $this->settings['iterations']; $i > 0 ; $i--) {
             $this->operateTurtle($inputArray);
             $this->turtle->set_color(mt_rand(20,255), mt_rand(20,255), mt_rand(20,255), 10);
         }
