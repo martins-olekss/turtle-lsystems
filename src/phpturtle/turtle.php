@@ -29,7 +29,7 @@ class Turtle {
 	function __construct($image) {
 		$this->gd_image = $image->gd_image;
 		$this->color = imagecolorallocate($this->gd_image, 0, 0, 0);
-		putenv('GDFONTPATH=' . realpath('.'));
+		//putenv('GDFONTPATH=' . realpath('.'));
 	}
 	function move($distance) {
 		$dx = $distance * sin(deg2rad($this->direction));

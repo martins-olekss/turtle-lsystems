@@ -1,7 +1,7 @@
 <?php
-require_once 'src/Lsystems.php';
+require_once 'src/LsystemsNew.php';
 
-$ls = new Lsystems();
+$ls = new LsystemsNew();
 $settings =
 [
     'imageWidth' => 5700,
