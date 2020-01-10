@@ -16,6 +16,6 @@ $settings =
         ['Y','-YF+XFX+FY-']
     ]
 ];
-mt_srand(352476347961239);
+mt_srand(3524763234961239);
 $ls->settings($settings)->init();
 $ls->execute()->gif();

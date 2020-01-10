@@ -17,18 +17,27 @@ class Image
         $this->image = $image;
     }
 
+    /**
+     * @param bool $sendHeader
+     */
     public function gif($sendHeader = true)
     {
         if ($sendHeader) header(self::HEADER_GIF);
         imagegif($this->image);
     }
 
+    /**
+     * @param bool $sendHeader
+     */
     public function png($sendHeader = true)
     {
         if ($sendHeader) header(self::HEADER_PNG);
         imagepng($this->image);
     }
 
+    /**
+     * @param bool $sendHeader
+     */
     public function webp($sendHeader = true)
     {
         if ($sendHeader) header(self::HEADER_WEBP);

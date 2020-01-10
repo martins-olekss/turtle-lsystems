@@ -18,6 +18,10 @@ class Turtle
         $this->color = imagecolorallocate($this->image, 0, 0, 0);
     }
 
+    /**
+     * @param $distance
+     * @return $this
+     */
     public function move($distance)
     {
         $dx = $distance * sin(deg2rad($this->direction));
@@ -40,6 +44,11 @@ class Turtle
         return $this;
     }
 
+    /**
+     * @param $text
+     * @param int $size
+     * @return $this
+     */
     public function write($text, $size = 20)
     {
         imagettftext(
@@ -56,6 +65,11 @@ class Turtle
         return $this;
     }
 
+    /**
+     * @param $x
+     * @param $y
+     * @return $this
+     */
     public function setPen($x, $y)
     {
         $this->x = $x;
@@ -64,6 +78,10 @@ class Turtle
         return $this;
     }
 
+    /**
+     * @param $rotation
+     * @return $this
+     */
     public function rotate($rotation)
     {
         $this->direction += $rotation;
@@ -77,6 +95,10 @@ class Turtle
     public function rotateLeft($rotation) {}
     public function rotateRight($rotation) {}
 
+    /**
+     * @param array $rgba
+     * @return $this
+     */
     public function setColor(array $rgba)
     {
         $this->color = imagecolorallocatealpha($this->image, $rgba[0], $rgba[1], $rgba[2], $rgba[3]);
@@ -84,6 +106,9 @@ class Turtle
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function penUp()
     {
         $this->penDown = false;
@@ -91,6 +116,9 @@ class Turtle
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function penDown()
     {
         $this->penDown = true;
@@ -98,6 +126,9 @@ class Turtle
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function penToggle()
     {
         $this->penDown = !$this->penDown;

@@ -23,12 +23,7 @@ class LsystemsNew
 
     /** @var TurtleDraw\Turtle */
     public $turtle;
-    public $string = [];
-
-    public function __construct()
-    {
-
-    }
+    public $string = '';
 
     public function settings(array $settings) {
         $this->settings = $settings;
@@ -43,8 +38,8 @@ class LsystemsNew
 
     public function execute()
     {
-        $this->string[] = $this->morph($this->settings['startInput']);
-        $this->draw($this->string[0]);
+        $this->string = $this->morph($this->settings['startInput']);
+        $this->draw($this->string);
 
         return $this;
     }
@@ -72,6 +67,7 @@ class LsystemsNew
      */
     public function operateTurtle(array $input)
     {
+        // TODO: Requires more flexible system for characters and their function
         foreach ($input as $char) {
             switch ($char) {
                 case 'F':
@@ -92,6 +88,7 @@ class LsystemsNew
      */
     public function draw($input)
     {
+        // TODO: Potentially ineffective call
         $inputArray = str_split($input);
         $this->turtle->setColor([mt_rand(20,255), mt_rand(20,255), mt_rand(20,255), 0]);
         $this->turtle->setPen($this->settings['startPosition'][0], $this->settings['startPosition'][1]);
