@@ -26,6 +26,8 @@ class Lsystems
     public $string = '';
 
     public function settings(array $settings) {
+        // Randomize seed for random colors
+        mt_srand(352476363461239);
         $this->settings = $settings;
 
         return $this;
@@ -46,6 +48,14 @@ class Lsystems
 
     public function gif() {
         $this->image->gif();
+    }
+
+    public function webp() {
+        $this->image->webp();
+    }
+
+    public function png() {
+        $this->image->png();
     }
 
     /**
