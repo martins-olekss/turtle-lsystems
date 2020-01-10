@@ -17,5 +17,5 @@ OR
 > note:
 for now there is no error handling and high parameter values could lead to issues with getting any result or getting result in timely fashion
 
-### Inspiration on L-Systems: 
+### Inspiration by L-Systems: 
 - https://jsantell.com/l-systems
