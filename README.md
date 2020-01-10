@@ -7,6 +7,3 @@ implementation, but main goal is to see interesting pictures.
 
 ### Inspiration on L-Systems: 
 - https://jsantell.com/l-systems
-
-### Source of Turtle class:
-- http://czterycztery.pl/programy/phpturtle/

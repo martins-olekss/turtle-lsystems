@@ -1,5 +1,6 @@
 <?php
-require_once 'phpturtle/turtle.php';
+require_once 'TurtleDraw/Turtle.php';
+require_once 'TurtleDraw/Image.php';
 
 class Lsystems
 {
@@ -16,14 +17,13 @@ class Lsystems
             ['Y', '−XF+YFY+FX−']
         ]
     ];
+
+    /** @var TurtleDraw\Image */
     public $image;
+
+    /** @var TurtleDraw\Turtle */
     public $turtle;
-    public $string = [];
-
-    public function __construct()
-    {
-
-    }
+    public $string = '';
 
     public function settings(array $settings) {
         $this->settings = $settings;
@@ -32,20 +32,20 @@ class Lsystems
     }
 
     public function init() {
-        $this->image = new Image($this->settings['imageWidth'], $this->settings['imageHeight'], 0, 0, 0);
-        $this->turtle = new Turtle($this->image);
+        $this->image = new TurtleDraw\Image($this->settings['imageWidth'], $this->settings['imageHeight'], [0, 0, 0]);
+        $this->turtle = new TurtleDraw\Turtle($this->image);
     }
 
     public function execute()
     {
-        $this->string[] = $this->morph($this->settings['startInput']);
-        $this->draw($this->string[0]);
+        $this->string = $this->morph($this->settings['startInput']);
+        $this->draw($this->string);
 
         return $this;
     }
 
     public function gif() {
-        $this->image->send_gif();
+        $this->image->gif();
     }
 
     /**
@@ -67,6 +67,7 @@ class Lsystems
      */
     public function operateTurtle(array $input)
     {
+        // TODO: Requires more flexible system for characters and their function
         foreach ($input as $char) {
             switch ($char) {
                 case 'F':
@@ -87,12 +88,13 @@ class Lsystems
      */
     public function draw($input)
     {
+        // TODO: Potentially ineffective call
         $inputArray = str_split($input);
-        $this->turtle->set_color(mt_rand(20,255), mt_rand(20,255), mt_rand(20,255), 0);
-        $this->turtle->goto($this->settings['startPosition'][0], $this->settings['startPosition'][1]);
+        $this->turtle->setColor([mt_rand(20,255), mt_rand(20,255), mt_rand(20,255), 0]);
+        $this->turtle->setPen($this->settings['startPosition'][0], $this->settings['startPosition'][1]);
         for ($i = $this->settings['iterations']; $i > 0 ; $i--) {
             $this->operateTurtle($inputArray);
-            $this->turtle->set_color(mt_rand(20,255), mt_rand(20,255), mt_rand(20,255), 10);
+            $this->turtle->setColor([mt_rand(20,255), mt_rand(20,255), mt_rand(20,255), 10]);
         }
     }
 }
