@@ -1,3 +1,8 @@
+window.addEventListener('DOMContentLoaded', (event) => {
+    refreshRules();
+    console.log('event: DOMContentLoaded, importing initial rules');
+});
+
 refreshRules = function () {
     $('.rules-list').empty();
     $.each(rulesJson, function (k, v) {
@@ -26,7 +31,6 @@ $('.refresh-button').click(function () {
     refreshRules();
 });
 
-refreshRules();
 $('.add-button').click(function () {
     let first = $('.first-part').val();
     let second = $('.second-part').val();
