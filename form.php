@@ -2,9 +2,9 @@
 // Set default settings
 $settings =
     [
-        'imageWidth' => 5700,
-        'imageHeight' => 5700,
-        'startPosition' => [2030, 2060],
+        'imageWidth' => 1700,
+        'imageHeight' => 1700,
+        'startPosition' => [1630, 1600],
         'iterations' => 100,
         'startInput' => 'X-Y-X+YY-XX+Y+X+Y',
         'rotate' => 22,
@@ -24,6 +24,7 @@ $settings =
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.min.css">
 </head>
 <body>
+
 <div id="app">
     <form method="get" action="draw.php">
         <label>width, height:
@@ -73,7 +74,10 @@ $settings =
         <textarea style="display: none" class="rules" name="rules" title="draw rules">{{ settings.rules }}</textarea>
         <input type="submit" class="submit" name="submitSettings" value="Start drawing process">
     </form>
+    <button type="button" class="submit" v-on:click="submitToDraw()">Draw & Show</button>
+    <img :src="responseData"/>
 </div>
+
 
 <script type="text/javascript" src="js/vue.min.js"></script>
 <script type="text/javascript">
@@ -82,7 +86,10 @@ $settings =
         data: {
             settings: <?= json_encode($settings) ?>,
             newObject: '',
-            newReplacement: ''
+            newReplacement: '',
+            response: '',
+            items: '',
+            responseData: ''
         },
         methods: {
             remove: function (id) {
@@ -90,6 +97,21 @@ $settings =
             },
             add: function (object, replacement) {
                 this.settings.rules.push([object, replacement]);
+            },
+            submitToDraw: function () {
+                fetch('/draw.php',
+                    {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        method: 'POST',
+                        body: JSON.stringify(this.settings)
+                    })
+                    .then(response => response.blob())
+                    .then(images => {
+                        this.responseData = URL.createObjectURL(images);
+                    })
+                    .catch(error => console.error(error));
             }
         }
     });
