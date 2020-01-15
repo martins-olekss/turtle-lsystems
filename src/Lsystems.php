@@ -54,8 +54,8 @@ class Lsystems
         $this->image->webp();
     }
 
-    public function png() {
-        $this->image->png();
+    public function png($sendHeaders = false, $fileName = null) {
+        $this->image->png($sendHeaders, $fileName);
     }
 
     /**

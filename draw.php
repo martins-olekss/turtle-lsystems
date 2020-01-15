@@ -15,4 +15,4 @@ $settings =
     ];
 
 $ls->settings($settings)->init();
-$ls->execute()->png();
+$ls->execute()->png(true);

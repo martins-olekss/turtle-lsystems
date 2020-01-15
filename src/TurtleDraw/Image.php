@@ -28,11 +28,12 @@ class Image
 
     /**
      * @param bool $sendHeader
+     * @param null $fileName
      */
-    public function png($sendHeader = true)
+    public function png($sendHeader = true, $fileName = null)
     {
         if ($sendHeader) header(self::HEADER_PNG);
-        imagepng($this->image);
+        imagepng($this->image, $fileName);
     }
 
     /**

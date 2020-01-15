@@ -32,12 +32,20 @@ $settings =
         </label>
         <label>drawing start x, y: <input type="text" name="startPositionX"
                                           value="<?= $settings['startPosition'][0] ?>"/>
-            <input type="text" name="startPositionY"
-                   value="<?= $settings['startPosition'][1] ?>"/></label>
-        <label>iterations: <input type="text" name="iterations" value="<?= $settings['iterations'] ?>"/></label>
-        <label>startInput: <input type="text" name="startInput" value="<?= $settings['startInput'] ?>"/></label>
-        <label>rotate: <input type="text" name="rotate" value="<?= $settings['rotate'] ?>"/></label>
-        <label>move: <input type="text" name="move" value="<?= $settings['move'] ?>"/></label>
+            <input type="text" name="startPositionY" value="<?= $settings['startPosition'][1] ?>"/>
+        </label>
+        <label>iterations:
+            <input type="text" name="iterations" value="<?= $settings['iterations'] ?>"/>
+        </label>
+        <label>startInput:
+            <input type="text" name="startInput" value="<?= $settings['startInput'] ?>"/>
+        </label>
+        <label>rotate:
+            <input type="text" name="rotate" value="<?= $settings['rotate'] ?>"/>
+        </label>
+        <label>move:
+            <input type="text" name="move" value="<?= $settings['move'] ?>"/>
+        </label>
         <table>
             <tr>
                 <th>id</th>
@@ -47,16 +55,16 @@ $settings =
             </tr>
             <tr class="new-rule">
                 <td></td>
-                <td><input type="text" v-model="newObject" value="1"/></td>
-                <td><input type="text" v-model="newReplacement" value="2"/></td>
+                <td><input type="text" v-model="newObject" value="1" title=""/></td>
+                <td><input type="text" v-model="newReplacement" value="2" title=""/></td>
                 <td>
                     <button type="button" v-on:click="add(newObject, newReplacement)">add</button>
                 </td>
             </tr>
             <tr v-for="(item, index) in settings.rules">
                 <td>{{ index }}</td>
-                <td><input v-model="settings.rules[index][0]" type="text"/></td>
-                <td><input v-model="settings.rules[index][1]" type="text"/></td>
+                <td><input v-model="settings.rules[index][0]" type="text" title=""/></td>
+                <td><input v-model="settings.rules[index][1]" type="text" title=""/></td>
                 <td>
                     <button type="button" v-on:click="remove(index)">remove</button>
                 </td>
@@ -74,14 +82,13 @@ $settings =
         data: {
             settings: <?= json_encode($settings) ?>,
             newObject: '',
-            newReplacement: '',
+            newReplacement: ''
         },
         methods: {
             remove: function (id) {
                 this.settings.rules.splice(id, 1);
             },
             add: function (object, replacement) {
-                console.log(object + ' - ' + replacement);
                 this.settings.rules.push([object, replacement]);
             }
         }
