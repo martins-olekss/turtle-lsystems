@@ -9,4 +9,4 @@ table, form { display: block; }
 .submit { background-color: #528022; }
 label { display: block; }
 .image { display: block;}
-img { width: 600px; }
+img { width: 600px; margin: 10px 0 10px 0; }
