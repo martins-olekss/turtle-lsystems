@@ -2,8 +2,8 @@
 // Set default settings
 $settings =
     [
-        'imageWidth' => 1700,
-        'imageHeight' => 1700,
+        'imageWidth' => 3700,
+        'imageHeight' => 3700,
         'startPosition' => [1630, 1600],
         'iterations' => 100,
         'startInput' => 'X-Y-X+YY-XX+Y+X+Y',
@@ -21,46 +21,48 @@ $settings =
 <head>
     <title>Generate images</title>
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.min.css">
 </head>
 <body>
 
 <div id="app">
-    <form method="get" action="draw.php">
+    <form method="get" action="draw.php" v-if="!isHidden">
         <label>width, height:
-            <input type="text" name="imageWidth" value="<?= $settings['imageWidth'] ?>"/>
-            <input type="text" name="imageHeight" value="<?= $settings['imageHeight'] ?>"/>
+            <input type="text" name="imageWidth" v-model="settings.imageWidth" value="<?= $settings['imageWidth'] ?>"/>
+            <input type="text" name="imageHeight" v-model="settings.imageHeight"
+                   value="<?= $settings['imageHeight'] ?>"/>
         </label>
-        <label>drawing start x, y: <input type="text" name="startPositionX"
-                                          value="<?= $settings['startPosition'][0] ?>"/>
-            <input type="text" name="startPositionY" value="<?= $settings['startPosition'][1] ?>"/>
+        <label>drawing start x, y:
+            <input type="text" name="startPositionX" v-model="settings.startPosition[0]"
+                   value="<?= $settings['startPosition'][0] ?>"/>
+            <input type="text" name="startPositionY" v-model="settings.startPosition[1]"
+                   value="<?= $settings['startPosition'][1] ?>"/>
         </label>
         <label>iterations:
-            <input type="text" name="iterations" value="<?= $settings['iterations'] ?>"/>
+            <input type="text" name="iterations" v-model="settings.iterations" value="<?= $settings['iterations'] ?>"/>
         </label>
         <label>startInput:
-            <input type="text" name="startInput" value="<?= $settings['startInput'] ?>"/>
+            <input type="text" name="startInput" v-model="settings.startInput" value="<?= $settings['startInput'] ?>"/>
         </label>
         <label>rotate:
-            <input type="text" name="rotate" value="<?= $settings['rotate'] ?>"/>
+            <input type="text" name="rotate" v-model="settings.rotate" value="<?= $settings['rotate'] ?>"/>
         </label>
         <label>move:
-            <input type="text" name="move" value="<?= $settings['move'] ?>"/>
+            <input type="text" name="move" v-model="settings.move" value="<?= $settings['move'] ?>"/>
         </label>
         <table>
-            <tr>
-                <th>id</th>
-                <th>subject</th>
-                <th>replacement</th>
-                <th>action</th>
-            </tr>
             <tr class="new-rule">
-                <td></td>
+                <td>Add rule</td>
                 <td><input type="text" v-model="newObject" value="1" title=""/></td>
                 <td><input type="text" v-model="newReplacement" value="2" title=""/></td>
                 <td>
                     <button type="button" v-on:click="add(newObject, newReplacement)">add</button>
                 </td>
+            </tr>
+            <tr>
+                <th>id</th>
+                <th>subject</th>
+                <th>replacement</th>
+                <th>action</th>
             </tr>
             <tr v-for="(item, index) in settings.rules">
                 <td>{{ index }}</td>
@@ -71,19 +73,20 @@ $settings =
                 </td>
             </tr>
         </table>
-        <textarea style="display: none" class="rules" name="rules" title="draw rules">{{ settings.rules }}</textarea>
-        <input type="submit" class="submit" name="submitSettings" value="Start drawing process">
     </form>
-    <button type="button" class="submit" v-on:click="submitToDraw()">Draw & Show</button>
-    <img :src="responseData"/>
+    <button type="button" class="submit" v-on:click="isHidden = !isHidden">Toggle Form</button>
+    <button type="button" class="submit" v-on:click="submitToDraw()">Draw</button>
+    <div class="image">
+        <a :href="responseData"><img :src="responseData"/></a>
+    </div>
 </div>
-
 
 <script type="text/javascript" src="js/vue.min.js"></script>
 <script type="text/javascript">
-    new Vue({
+    vm = new Vue({
         el: '#app',
         data: {
+            isHidden: false,
             settings: <?= json_encode($settings) ?>,
             newObject: '',
             newReplacement: '',

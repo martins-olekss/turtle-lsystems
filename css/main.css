@@ -1,3 +1,12 @@
+table { margin-top: 20px; border-collapse: collapse; }
+table tr td, table tr th { border: 1px solid #333; padding: 3px; }
 table tr.new-rule td { background-color: #51804b; }
-table input, table button { background-color: #97bcff; color: #333; }
+form input { display: block; }
+input { padding: 5px; border: 1px solid #333; border-radius: 5px; background-color: #97bcff; color: #333; }
+button { padding: 5px; border: 1px solid #333; border-radius: 5px; min-width: 80px;}
+button:hover { background-color: #8dff80; }
+table, form { display: block; }
 .submit { background-color: #528022; }
+label { display: block; }
+.image { display: block;}
+img { width: 600px; }
